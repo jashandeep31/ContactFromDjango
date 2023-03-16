@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-import sys
+
 
 from pathlib import Path
 
@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-h9fyecb@*s00d-b#%9!d&k&_t#oq5n!(2!9p6*3p^ms_zz##!t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['170.187.234.48']
+ALLOWED_HOSTS = ['170.187.234.48','127.0.0.1']
 # ALLOWED_HOSTS = ["$HOST"]
 
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'rest_framework',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     "api.apps.ApiConfig",
     'main.apps.MainConfig'
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -129,10 +131,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
